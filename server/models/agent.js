@@ -34,4 +34,9 @@ const agentSchema = new mongoose.Schema({
   },
 });
 
+// In case user is marked inactive and user indexed before current index the we have to decrease current index by one
+// agentSchema.pre('updateOne',(next) => {
+
+// })
+
 export default mongoose.model("Agents", agentSchema);

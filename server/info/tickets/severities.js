@@ -1,1 +1,1 @@
-export default Object.freeze(["Blocker", "Assigned", "Major", "Minor"]);
+export default Object.freeze(["Blocker", "Critical", "Major", "Minor"]);

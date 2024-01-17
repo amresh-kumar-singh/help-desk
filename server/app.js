@@ -4,9 +4,15 @@ import connectDB from "#root/db/index";
 import agentsRoute from "#root/routes/agents";
 import ticketsRoute from "#root/routes/tickets";
 import configs from "#root/configs/index";
+import { initializeSettings } from "#root/controllers/settings";
 
 var app = express();
 const db = connectDB();
+
+// Initialize Settings document.
+(async function () {
+  await initializeSettings();
+})();
 
 app.use(logger("dev"));
 app.use(express.json());

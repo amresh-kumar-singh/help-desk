@@ -1,4 +1,5 @@
 import Agents from "#root/models/agent";
+import createErrorObject from "#root/utils/createErrorObject";
 
 export default async function (req, res, next) {
   const { name, email, phone, description } = req.body;
@@ -12,25 +13,7 @@ export default async function (req, res, next) {
       data: agent,
     });
   } catch (error) {
-    const err = {};
-    switch (error.name) {
-      case "ValidationError":
-        err.code = 403;
-        err.message = Object.values(error.errors)[0].message;
-        break;
-      case "MongoServerError":
-        err.code = 403;
-        if (error.code === 11000)
-          err.message = `${Object.keys(
-            error.keyValue
-          )} with value ${Object.values(error.keyValue)} already exits!`;
-        break;
-      default:
-        err.code = 400;
-        err.message = error.message;
-        // In case of unknown error also setting whole error to err object for debugging
-        err.error = error;
-    }
+    const err = createErrorObject(error);
     next(err);
   }
 }

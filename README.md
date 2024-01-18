@@ -4,10 +4,9 @@
 
 ## Table of Contents
 
-- [Usage](#usage)
+- [Getting Started](#getting-started)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Configuration](#configuration)
 - [License](#license)
 
 ## Getting Started
@@ -23,7 +22,7 @@ git clone https://github.com/amresh-kumar-singh/help-desk
 ```
 
 ```bash
-cd help-kart/client
+cd help-desk/client
 ```
 
 ```bash
@@ -35,7 +34,7 @@ npm run dev
 ```
 
 ```bash
-cd help-kart/server
+cd help-desk/server
 ```
 
 ```bash

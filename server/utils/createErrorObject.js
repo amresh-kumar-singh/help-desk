@@ -12,7 +12,7 @@ export default function (error) {
       if (error.code === 11000)
         err.message = `${Object.keys(
           error.keyValue
-        )} with value ${Object.values(error.keyValue)} already exits!`;
+        )} with value ${Object.values(error.keyValue)} already exists!`;
       break;
     default:
       err.code = 400;

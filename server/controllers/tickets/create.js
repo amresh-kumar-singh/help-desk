@@ -2,7 +2,7 @@ import Tickets from "#root/models/ticket";
 import createErrorObject from "#root/utils/createErrorObject";
 
 export default async function (req, res, next) {
-  const { topic, severity, type, description, assignedTo, status } = req.body;
+  const { topic, severity, type, description, assignedTo } = req.body;
 
   try {
     const ticket = await Tickets.create({
@@ -11,7 +11,6 @@ export default async function (req, res, next) {
       type,
       description,
       assignedTo,
-      status,
     });
 
     res.status(201);

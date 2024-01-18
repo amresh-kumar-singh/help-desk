@@ -3,7 +3,6 @@ import createErrorObject from "#root/utils/createErrorObject";
 
 export default async function (req, res, next) {
   const { name, email, phone, description } = req.body;
-  console.log("interested");
   try {
     const agent = await Agents.create({ name, email, phone, description });
 

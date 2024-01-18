@@ -31,11 +31,30 @@ export default async function (req, res, next) {
     // No of documents to skip
     const skip = (page - 1) * limit;
 
-    const tickets = await Tickets.find(query)
-      .sort(sortObj ? sortObj : {})
-      .skip(skip)
-      .limit(limit);
-
+    // const tickets = await Tickets.find(query)
+    //   .sort(sortObj ? sortObj : {})
+    //   .skip(skip)
+    //   .limit(limit);
+    const tickets = await Tickets.aggregate([
+      { $match: { ...query } },
+      {
+        $lookup: {
+          from: "agents",
+          let: { assignedTo: "$assignedTo" },
+          pipeline: [{ $match: { $expr: { $eq: ["$_id", "$$assignedTo"] } } }],
+          as: "agents",
+        },
+      },
+      { $unwind: { path: "$agents", preserveNullAndEmptyArrays: true } },
+      {
+        $addFields: {
+          assigneeName: "$agents.name",
+        },
+      },
+      ...(sortObj ? [{ $sort: sortObj }] : []),
+      { $skip: Number(skip) },
+      { $limit: Number(limit) },
+    ]);
     res.status(201);
     return res.json({
       message: "Fetched all tickets successfully!",

@@ -5,15 +5,27 @@ import agentsRoute from "#root/routes/agents";
 import ticketsRoute from "#root/routes/tickets";
 import configs from "#root/configs/index";
 import { initializeSettings } from "#root/controllers/settings";
+import cors from "cors";
 
 var app = express();
 const db = connectDB();
 
 // Initialize Settings document.
 (async function () {
-  await initializeSettings();
+  try {
+    await initializeSettings();
+  } catch (error) {
+    console.log("Error while initializing Settings", error);
+  }
 })();
 
+app.use(
+  cors({
+    origin: ["https://help-desk-client.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: false,
+  })
+);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

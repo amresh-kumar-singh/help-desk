@@ -65,7 +65,7 @@ export default async function (req, res, next) {
       res.status(201);
       return res.json({
         code: 200,
-        message: "Assignee update successfully!",
+        message: `Ticket assigned to ${agentAtCurrentIndex.name}!`,
         data: { assignedTo: agentAtCurrentIndex },
       });
     } else {

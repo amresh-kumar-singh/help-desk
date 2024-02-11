@@ -1,4 +1,4 @@
-# HELP KART
+# HELP DESK
 
 > This is a ticket and agent management system that employs a round-robin approach for ticket assignment. Additionally, new agents and tickets can be created seamlessly through the system. The API provides sorting, filtering, and pagination features for comprehensive retrieval of all tickets.
 
